@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Mukta:wght@300;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --header: #222021;
+    --l-text-bg: #fbfbf9;
+    --olive: #91967D;
+}
+
+body{
+    background-color: var(--l-text-bg);
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3{
+    font-family: 'Mukta', sans-serif;
+}
+
+header{
+    position: sticky;
+    background-color: var(--header);
+    box-shadow: 0px 8px 13px 0px rgba(34,34,34,1);
+    z-index: 999;
+    display: grid;
+    place-items: center;
+}
+
+.navbar{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10dvh;
+}
+
+.logo{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--l-text-bg);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-menu{
+    background-color: var(--header);
+    list-style-type: none;
+    width: 100%;
+    position: fixed;
+    left: -100%;
+    top: 10dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: .3s ease;
+    z-index: 3;
+}
+
+.nav-menu.active{
+    left: 0;
+}
+
+.nav-item{
+    margin: .5em 0;
+    padding: 1rem;
+    transition: color .3s ease;
+}
+
+.nav-link:hover{
+    color: #f4c6a2;
+    transition: color .3s ease;
+}
+
+.nav-link{
+    text-decoration: none;
+    color: var(--l-text-bg);
+}
+
+.hamburger{
+    cursor: pointer;
+    height: 50%;
+}
+  
+.bar{
+    display: block;
+    width: 32px;
+    height: 4px;
+    margin: 5px auto;
+    background-color: var(--l-text-bg);
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+} 
+
+.hamburger.active .bar:nth-child(2){
+    opacity: 0;
+} 
+
+.hamburger.active .bar:nth-child(1){
+    transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(3){
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+
+
+.hero{
+    background-image: url(images/ballons.jpg);
+    background-size: cover;
+    background-position: 50% 68%;
+    background-repeat: no-repeat;
+    height: 90dvh;
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero::after{
+    content: "" ;
+    position: absolute;
+    background-color: var(--l-text-bg);
+    inset: 0;
+    z-index: -1;
+    opacity: .4;
+}
+
+.hero > h1{
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 2em;
+    color: var(--header);
+}
+
+.hero > h3{
+    color: var(--header);
+}
+
+
+@media screen and (min-width: 64em){
+    .hamburger{
+        display: none;
+    }
+
+    .nav-menu{
+        all: unset;
+
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-item{
+        margin: 0 .5em;
+    }
+}
