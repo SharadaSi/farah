@@ -1,30 +1,49 @@
+
+let isMenuOpen = false //výchozí stav menu
 const hamburger = document.querySelector(".hamburger")
-const navMenu = document.querySelector(".nav-menu ") 
-const body = document.querySelector("body")
+const navMenu = document.querySelector(".nav-menu")
+const menuBtn = document.querySelector(".menu-btn")
+
+
+ 
+function toggleMenu() {
+    isMenuOpen = true
+    isMenuOpen = !isMenuOpen
+}
 
 // Funkce která na kliknutí jinde než na hamburger nebo dropdown menu schová dropdown menu
 const handleClickOutside = (event) => {
-    if (!navMenu.contains(event.target) && event.target !== hamburger) {
-      hamburger.classList.remove("active");
-      navMenu.classList.remove("active");
-    }
+    if (!navMenu.contains(event.target) && event.target !== menuBtn) {
+      navMenu.classList.remove("active")
+      hamburger.classList.remove("active")
+      toggleMenu()
+    } else {}
 }
 
-hamburger.addEventListener("click", () => {
-    
-    //Na elementu .hamburger vyber classu .active a udělej s ní toggle
-    hamburger.classList.toggle("active")
+menuBtn.addEventListener("click", () => {
+    //Výchozí hodnota - menu není otevrene se na kliknutí změní na opačnou boolean hodnotu
+    isMenuOpen = !isMenuOpen
+    //V tuto chvíli je isMenuOpen true a provede se podmínka
+    if(isMenuOpen){
+        menuBtn.classList.add("open")
+        navMenu.classList.add("open")
+        
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => { 
+            navMenu.classList.remove("open")
+            //Zpozdeni druhe akce, aby se stihla provest pred removnutim classy open
+            setTimeout(() => {
+                menuBtn.classList.remove("open");
+                }, 10)
 
-    //Na elementu .nav-menu vyber classu .active a udělej s ní toggle (aplikuje se na položky v .nav-menu)
-    navMenu.classList.toggle("active")
+            menuBtn.classList.remove("open")
+            toggleMenu()
+        }))
 
-    //Po kliknutí na odkaz v menu se skryje celý dropdown menu
-    document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-        hamburger.classList.remove("active")
-        navMenu.classList.remove("active")
-    }))
+        const body = document.querySelector("body")
+        body.addEventListener("click", handleClickOutside)
 
-    //Po kliknutí jinde než na .hamburger nebo .nav-menu zavři dropdown menu
-    body.addEventListener("click", handleClickOutside);
-}) 
-
+    } else{
+        navMenu.classList.remove("open")
+        menuBtn.classList.remove("open")
+    }
+})
