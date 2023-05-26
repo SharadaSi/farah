@@ -39,8 +39,9 @@ menuBtn.addEventListener("click", () => {
             toggleMenu()
         }))
 
-        const body = document.querySelector("body")
-        body.addEventListener("click", handleClickOutside)
+        //Nefunguje :( Ví někdo proč? :D =>
+        // const body = document.querySelector("body")
+        // body.addEventListener("click", handleClickOutside)
 
     } else{
         navMenu.classList.remove("open")
